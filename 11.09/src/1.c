@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <assert.h>
 
-int main(void) {
+int main(void)
+{
     int x;
     scanf("%d", &x);
 

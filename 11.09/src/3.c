@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void) {
+int main(void)
+{
     unsigned int n, m, max;
     unsigned int a;
     scanf("%u%u", &m, &n);
@@ -10,7 +11,7 @@ int main(void) {
         max = m;
         a = 0;
     }
-    else { 
+    else {
         max = n;
         a = 1;
     }
