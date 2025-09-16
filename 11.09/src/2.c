@@ -3,7 +3,8 @@
 
 int division(int x, int y);
 
-int division(int x, int y) {
+int division(int x, int y)
+{
     int res = 0;
 
     assert(y != 0); // проверка деления на 0
@@ -46,7 +47,8 @@ int division(int x, int y) {
     return res;
 }
 
-int main(void) {
+int main(void)
+{
     int first_int, second_int;
 
     scanf("%d%d", &first_int, &second_int);
