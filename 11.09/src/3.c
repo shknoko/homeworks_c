@@ -1,72 +1,64 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int *reverse_first_part(int a, int *array);
+int *reverse_second_part(int a, int b, int *array);
+int *reverse_full_array(int sum, int *array);
+
+int *reverse_first_part(int a, int *array)
+{
+    for (int i = 0; i < a / 2; i++) {
+        int temp = array[i];
+        array[i] = array[a - i - 1];
+        array[a - i - 1] = temp;
+    }
+
+    return array;
+}
+
+int *reverse_second_part(int a, int b, int *array)
+{
+    for (int i = 0; i < b / 2; i++) {
+        int temp = array[a + i];
+        array[a + i] = array[a + b - i - 1];
+        array[a + b - i - 1] = temp;
+    }
+
+    return array;
+}
+
+int *reverse_full_array(int sum, int *array)
+{
+    for (int i = 0; i < sum / 2; i++) {
+        int temp = array[i];
+        array[i] = array[sum - i - 1];
+        array[sum - i - 1] = temp;
+    }
+
+    return array;
+}
+
 int main(void)
 {
-    unsigned int n, m, max;
-    unsigned int a;
+    unsigned int m = 0;
+    unsigned int n = 0;
     scanf("%u%u", &m, &n);
 
-    if (m > n) {
-        max = m;
-        a = 0;
-    }
-    else {
-        max = n;
-        a = 1;
+    int *array = malloc((n + m) * sizeof(int));
+
+    for (int i = 0; i < n + m; i++) {
+        scanf("%d", &array[i]);
     }
 
+    array = reverse_first_part(m, array);
+    array = reverse_second_part(m, n, array);
+    array = reverse_full_array(m + n, array);
 
-    int *start = malloc(max * sizeof(int));
-    int *end = malloc(max * sizeof(int));
-
-    for (unsigned int i = 0; i < max; i++) {
-        if (a == 1) {
-            if (i < m) {
-                scanf("%d", &start[i]);
-            }
-            else {
-                start[i] = 0;
-            }
-        }
-        else {
-            scanf("%d", &start[i]);
-        }
+    for (int i = 0; i < n + m; i++) {
+        printf("%d ", array[i]);
     }
 
-    for (unsigned int i = 0; i < max; i++) {
-        if (a == 0) {
-            if (i < n) {
-                scanf("%d", &end[i]);
-            }
-            else {
-                end[i] = 0;
-            }
-        }
-        else {
-            scanf("%d", &end[i]);
-        }
-    }
-
-    int temp;
-    for (unsigned int i = 0; i < max; i++) {
-        temp = start[i];
-        start[i] = end[i];
-        end[i] = temp;
-    }
-
-    for (unsigned int i = 0; i < n; i++) {
-        printf("%d ", start[i]);
-    }
     printf("\n");
-
-    for (unsigned int i = 0; i < m; i++) {
-        printf("%d ", end[i]);
-    }
-    printf("\n");
-
-    free(start);
-    free(end);
 
     return 0;
 }
