@@ -60,5 +60,7 @@ int main(void)
 
     printf("\n");
 
+    free(array);
+
     return 0;
 }
