@@ -1,72 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void)
-{
-    unsigned int n, m, max;
-    unsigned int a;
-    scanf("%u%u", &m, &n);
+int *reverse_array(int a, int b, int *array);
 
-    if (m > n) {
-        max = m;
+int *reverse_array(int a, int b, int *array)
+{
+    // если a = 0, то считается, что переворачиваем весь массив
+    // если b = 0, то считается, что переворачиваем первую часть
+    // если ни a, ни b не равны 0, то считается, что переворачиваем вторую часть длиной b
+
+    int shift = 0;
+
+    if (b == 0) {
+        b = a;
         a = 0;
     }
-    else {
-        max = n;
-        a = 1;
+    else if (a != 0 && b != 0) {
+        shift = a;
+        a = 0;
     }
 
-
-    int *start = malloc(max * sizeof(int));
-    int *end = malloc(max * sizeof(int));
-
-    for (unsigned int i = 0; i < max; i++) {
-        if (a == 1) {
-            if (i < m) {
-                scanf("%d", &start[i]);
-            }
-            else {
-                start[i] = 0;
-            }
-        }
-        else {
-            scanf("%d", &start[i]);
-        }
+    for (int i = a; i < b / 2; i++) {
+        int temp = array[shift + i];
+        array[shift + i] = array[shift + a + b - i - 1];
+        array[shift + a + b - i - 1] = temp;
     }
 
-    for (unsigned int i = 0; i < max; i++) {
-        if (a == 0) {
-            if (i < n) {
-                scanf("%d", &end[i]);
-            }
-            else {
-                end[i] = 0;
-            }
-        }
-        else {
-            scanf("%d", &end[i]);
-        }
+    return array;
+}
+
+int main(void)
+{
+    unsigned int m = 0;
+    unsigned int n = 0;
+    scanf("%u%u", &m, &n);
+
+    int *array = malloc((n + m) * sizeof(int));
+
+    for (int i = 0; i < n + m; i++) {
+        scanf("%d", &array[i]);
     }
 
-    int temp;
-    for (unsigned int i = 0; i < max; i++) {
-        temp = start[i];
-        start[i] = end[i];
-        end[i] = temp;
+    array = reverse_array(m, 0, array);
+    array = reverse_array(m, n, array);
+    array = reverse_array(0, m + n, array);
+
+    for (int i = 0; i < n + m; i++) {
+        printf("%d ", array[i]);
     }
 
-    for (unsigned int i = 0; i < n; i++) {
-        printf("%d ", start[i]);
-    }
     printf("\n");
 
-    for (unsigned int i = 0; i < m; i++) {
-        printf("%d ", end[i]);
-    }
-    printf("\n");
-
-    free(start);
-    free(end);
+    free(array);
 
     return 0;
 }
