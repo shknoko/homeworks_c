@@ -1,38 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *reverse_first_part(int a, int *array);
-int *reverse_second_part(int a, int b, int *array);
-int *reverse_full_array(int sum, int *array);
+int *reverse_array(int a, int b, int *array);
 
-int *reverse_first_part(int a, int *array)
+int *reverse_array(int a, int b, int *array)
 {
-    for (int i = 0; i < a / 2; i++) {
-        int temp = array[i];
-        array[i] = array[a - i - 1];
-        array[a - i - 1] = temp;
+    // если a = 0, то считается, что переворачиваем весь массив
+    // если b = 0, то считается, что переворачиваем первую часть
+    // если ни a, ни b не равны 0, то считается, что переворачиваем вторую часть длиной b
+
+    int shift = 0;
+
+    if (b == 0) {
+        b = a;
+        a = 0;
+    }
+    else if (a != 0 && b != 0) {
+        shift = a;
+        a = 0;
     }
 
-    return array;
-}
-
-int *reverse_second_part(int a, int b, int *array)
-{
-    for (int i = 0; i < b / 2; i++) {
-        int temp = array[a + i];
-        array[a + i] = array[a + b - i - 1];
-        array[a + b - i - 1] = temp;
-    }
-
-    return array;
-}
-
-int *reverse_full_array(int sum, int *array)
-{
-    for (int i = 0; i < sum / 2; i++) {
-        int temp = array[i];
-        array[i] = array[sum - i - 1];
-        array[sum - i - 1] = temp;
+    for (int i = a; i < b / 2; i++) {
+        int temp = array[shift + i];
+        array[shift + i] = array[shift + a + b - i - 1];
+        array[shift + a + b - i - 1] = temp;
     }
 
     return array;
@@ -50,9 +41,9 @@ int main(void)
         scanf("%d", &array[i]);
     }
 
-    array = reverse_first_part(m, array);
-    array = reverse_second_part(m, n, array);
-    array = reverse_full_array(m + n, array);
+    array = reverse_array(m, 0, array);
+    array = reverse_array(m, n, array);
+    array = reverse_array(0, m + n, array);
 
     for (int i = 0; i < n + m; i++) {
         printf("%d ", array[i]);
