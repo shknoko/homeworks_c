@@ -5,7 +5,7 @@
 typedef struct StackNode
 {
     char data;
-    StackNode* next;
+    struct StackNode* next;
 } StackNode;
 
 typedef struct Stack 
