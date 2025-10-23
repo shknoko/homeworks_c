@@ -7,4 +7,5 @@ Stack* newStack(void);
 bool isEmpty(Stack*);
 void push(Stack* stack, char data);
 char pop(Stack* stack);
+char peek(Stack* stack);
 void deleteStack(Stack* stack);

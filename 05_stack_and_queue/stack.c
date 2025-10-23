@@ -48,6 +48,15 @@ char pop(Stack* stack)
     return data;
 }
 
+char peek(Stack* stack)
+{
+    if (isEmpty(stack)) {
+        return '\0';
+    }
+
+    return stack->head->data;
+}
+
 void deleteStack(Stack* stack)
 {
     while (!isEmpty(stack)) {
