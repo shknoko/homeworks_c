@@ -18,14 +18,21 @@ int sortStation(char* str, char* res)
 {
     unsigned lastUsedResIndex = 0;
     Stack* stack = newStack();
-    for (unsigned long i = 0; i < strlen(str); i++) {
+    unsigned long len = strlen(str);
+    for (unsigned long i = 0; i < len; i++) {
         if (isdigit(str[i])) {
             if (lastUsedResIndex > 0 && res[lastUsedResIndex - 1] != ' ') {
                 res[lastUsedResIndex] = ' ';
                 lastUsedResIndex++;
             }
-            res[lastUsedResIndex] = str[i];
-            lastUsedResIndex++;
+            while (i < len && isdigit(str[i])) {
+                res[lastUsedResIndex] = str[i];
+                lastUsedResIndex++;
+                i++;
+            }
+            if (i < len) {
+                i--;
+            }
         } else if ((str[i] == '+') || (str[i] == '-') || (str[i] == '*') || (str[i] == '/')) {
             while (!isEmpty(stack)) {
                 char peeked = peek(stack);
@@ -47,22 +54,30 @@ int sortStation(char* str, char* res)
         } else if (str[i] == '(') {
             push(stack, str[i]);
         } else if (str[i] == ')') {
-            char popped = pop(stack);
-            while (popped != '(') {
+            char peeked = 0;
+            if (!isEmpty(stack)) {
+                peeked = peek(stack);
+            } else {
+                deleteStack(stack);
+                return 1;
+            }
+            while (peeked != '(') {
                 if (lastUsedResIndex > 0 && res[lastUsedResIndex - 1] != ' ') {
                     res[lastUsedResIndex] = ' ';
                     lastUsedResIndex++;
                 }
-                res[lastUsedResIndex] = popped;
+                res[lastUsedResIndex] = peeked;
                 lastUsedResIndex++;
+                pop(stack);
 
                 if (!isEmpty(stack)) {
-                    popped = pop(stack);
+                    peeked = peek(stack);
                 } else {
                     deleteStack(stack);
                     return 1;
                 }
             }
+            pop(stack);
         }
     }
     while (!isEmpty(stack)) {
@@ -78,6 +93,7 @@ int sortStation(char* str, char* res)
         res[lastUsedResIndex] = popped;
         lastUsedResIndex++;
     }
+    res[lastUsedResIndex] = '\0';
     deleteStack(stack);
     return 0;
 }
@@ -90,7 +106,6 @@ int main(void) {
     fgets(input, n + 1, stdin);
 
     char* res = calloc(n + 1, sizeof(char));
-    res[n] = '\0';
 
     if (sortStation(input, res) == 0) {
         printf("%s\n", res);
