@@ -5,7 +5,25 @@
 
 int bracketsChecker(char* string, bool* result)
 {
+    int balance = 0;
+    unsigned long len = strlen(string);
 
+    for (unsigned long i = 0; i < len; i++) {
+        if (string[i] == '(') {
+            balance++;
+        } else if (string[i] == ')') {
+            balance--;
+            if (balance < 0) {
+                *result = false;
+            }
+        }
+    }
+
+    if (balance != 0) {
+        *result = false;
+    }
+
+    return 0;
 }
 
 int main(void)
