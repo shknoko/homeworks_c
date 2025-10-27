@@ -55,12 +55,12 @@ int sortStation(char* str, char* res)
             push(stack, str[i]);
         } else if (str[i] == ')') {
             char peeked = 0;
-            if (!isEmpty(stack)) {
-                peeked = peek(stack);
-            } else {
+            if (isEmpty(stack)) {
                 deleteStack(stack);
                 return 1;
+                peeked = peek(stack);
             }
+            peeked = peek(stack);
             while (peeked != '(') {
                 if (lastUsedResIndex > 0 && res[lastUsedResIndex - 1] != ' ') {
                     res[lastUsedResIndex] = ' ';
@@ -70,12 +70,12 @@ int sortStation(char* str, char* res)
                 lastUsedResIndex++;
                 pop(stack);
 
-                if (!isEmpty(stack)) {
-                    peeked = peek(stack);
-                } else {
+                if (isEmpty(stack)) {
                     deleteStack(stack);
                     return 1;
+                    peeked = peek(stack);
                 }
+                peeked = peek(stack);
             }
             pop(stack);
         }
