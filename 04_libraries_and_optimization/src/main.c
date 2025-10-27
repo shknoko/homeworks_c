@@ -1,7 +1,6 @@
+#include "sort.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-extern int selectionSort(int *array, int len);
 
 int main(void)
 {
