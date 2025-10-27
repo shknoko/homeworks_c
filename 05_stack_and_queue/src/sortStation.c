@@ -58,7 +58,6 @@ int sortStation(char* str, char* res)
             if (isEmpty(stack)) {
                 deleteStack(stack);
                 return 1;
-                peeked = peek(stack);
             }
             peeked = peek(stack);
             while (peeked != '(') {
@@ -73,7 +72,6 @@ int sortStation(char* str, char* res)
                 if (isEmpty(stack)) {
                     deleteStack(stack);
                     return 1;
-                    peeked = peek(stack);
                 }
                 peeked = peek(stack);
             }
