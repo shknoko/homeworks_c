@@ -1,38 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+int bracketsChecker(char* string, bool* result)
+{
+
+}
 
 int main(void)
 {
     int n = 0;
     scanf("%d\n", &n);
 
-    char *string = malloc((n + 1) * sizeof(char));
-    for (int i = 0; i < n; i++) {
-        scanf("%d\n", string[i]);
-    }
+    char* input = calloc(n + 1, sizeof(char));
+    fgets(input, n + 1, stdin);
 
-    int balance = 0;
+    bool result = true;
 
-    for (int charNum = 0; charNum < n; charNum++) {
-        if (string[charNum] == '(') {
-            balance++;
-        } else if (string[charNum] == ')') {
-            balance--;
-            if (balance < 0) {
-                printf("Баланс скобок не соблюдён\n");
-                free(string);
-                return 0;
-            }
-        }
-    }
+    bracketsChecker(input, &result);
+    printf("%d\n", result);
 
-    if (balance != 0) {
-        printf("Баланс скобок не соблюдён\n");
-        free(string);
-        return 0;
-    }
-
-    printf("Баланс скобок соблюдён\n");
-    free(string);
+    free(input);
     return 0;
 }
