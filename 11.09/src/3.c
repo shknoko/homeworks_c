@@ -1,72 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int reverseArray(unsigned a, unsigned b, int* array);
+
+int reverseArray(unsigned a, unsigned b, int* array)
+{
+    if (b < a) {
+        return 1;
+    }
+
+    for (unsigned i = 0; i < (b - a + 1) / 2; i++) {
+        int temp = array[a + i];
+        array[a + i] = array[b - i];
+        array[b - i] = temp;
+    }
+
+    return 0;
+}
+
 int main(void)
 {
-    unsigned int n, m, max;
-    unsigned int a;
+    unsigned m = 0;
+    unsigned n = 0;
     scanf("%u%u", &m, &n);
 
-    if (m > n) {
-        max = m;
-        a = 0;
-    }
-    else {
-        max = n;
-        a = 1;
+    int* array = calloc(n + m, sizeof(int));
+
+    for (unsigned i = 0; i < n + m; i++) {
+        scanf("%d", &array[i]);
     }
 
-
-    int *start = malloc(max * sizeof(int));
-    int *end = malloc(max * sizeof(int));
-
-    for (unsigned int i = 0; i < max; i++) {
-        if (a == 1) {
-            if (i < m) {
-                scanf("%d", &start[i]);
-            }
-            else {
-                start[i] = 0;
-            }
-        }
-        else {
-            scanf("%d", &start[i]);
+    if (((m != 0) && (n != 0))) {
+        if ((reverseArray(0, m - 1, array) != 0) || (reverseArray(m, m + n - 1, array) != 0) || (reverseArray(0, m + n - 1, array) != 0)) {
+            return 1;
         }
     }
 
-    for (unsigned int i = 0; i < max; i++) {
-        if (a == 0) {
-            if (i < n) {
-                scanf("%d", &end[i]);
-            }
-            else {
-                end[i] = 0;
-            }
-        }
-        else {
-            scanf("%d", &end[i]);
-        }
+    for (unsigned i = 0; i < n + m; i++) {
+        printf("%d ", array[i]);
     }
 
-    int temp;
-    for (unsigned int i = 0; i < max; i++) {
-        temp = start[i];
-        start[i] = end[i];
-        end[i] = temp;
-    }
-
-    for (unsigned int i = 0; i < n; i++) {
-        printf("%d ", start[i]);
-    }
     printf("\n");
 
-    for (unsigned int i = 0; i < m; i++) {
-        printf("%d ", end[i]);
-    }
-    printf("\n");
-
-    free(start);
-    free(end);
+    free(array);
 
     return 0;
 }
