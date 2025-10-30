@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int reverseArray(unsigned a, unsigned b, int *array);
+int reverseArray(unsigned a, unsigned b, int* array);
 
-int reverseArray(unsigned a, unsigned b, int *array)
+int reverseArray(unsigned a, unsigned b, int* array)
 {
     if (b < a) {
         return 1;
