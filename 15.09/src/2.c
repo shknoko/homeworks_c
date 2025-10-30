@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-int substrCount(char* s, char* s1, int lenS, int lenS1, int* counter)
+bool substrCount(char* s, char* s1, int lenS, int lenS1, int* counter)
 {
     for (int i = 0; i < lenS; i++) {
         int matchLen = 0;
@@ -20,7 +21,7 @@ int substrCount(char* s, char* s1, int lenS, int lenS1, int* counter)
         }
     }
 
-    return 0;
+    return false;
 }
 
 int main(void)

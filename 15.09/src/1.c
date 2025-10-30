@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-int bracketsChecker(char* string, bool* result)
+bool bracketsChecker(char* string, bool* result)
 {
     int balance = 0;
     unsigned long len = strlen(string);
@@ -23,7 +23,7 @@ int bracketsChecker(char* string, bool* result)
         *result = false;
     }
 
-    return 0;
+    return ;
 }
 
 int main(void)
