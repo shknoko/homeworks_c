@@ -3,37 +3,43 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-
-int main(void)
+int substrCount(char* s, char* s1, int lenS, int lenS1, int* counter)
 {
-    int substrCount = 0;
-    int nS = 0;
-    int nS1 = 0;
-    scanf("%d%d\n", &nS, &nS1);
+    for (int i = 0; i < lenS; i++) {
+        int matchLen = 0;
 
-    char *s = malloc((nS + 1) * sizeof(char));
-    char *s1 = malloc((nS1 + 1) * sizeof(char));
-
-    fgets(s, nS + 1, stdin);
-    getchar();
-    fgets(s1, nS1 + 1, stdin);
-
-    for (int i = 0; i < nS; i++) {
-        int strike = 0;
-
-        for (int o = i; o < MIN(nS, i + nS1); o++) {
+        for (int o = i; o < MIN(lenS, i + lenS1); o++) {
             if (s1[o - i] != s[o]) {
                 break;
             }
-            strike++;
+            matchLen++;
         }
 
-        if (strike == nS1) {
-            substrCount++;
+        if (matchLen == lenS1) {
+            (*counter)++;
         }
     }
 
-    printf("%d\n", substrCount);
+    return 0;
+}
+
+int main(void)
+{
+    int counter = 0;
+    int lenS = 0;
+    int lenS1 = 0;
+    scanf("%d%d\n", &lenS, &lenS1);
+
+    char* s = malloc((lenS + 1) * sizeof(char));
+    char* s1 = malloc((lenS1 + 1) * sizeof(char));
+
+    fgets(s, lenS + 1, stdin);
+    getchar();
+    fgets(s1, lenS1 + 1, stdin);
+
+    substrCount(s, s1, lenS, lenS1, &counter);
+
+    printf("%d\n", counter);
 
     free(s);
     free(s1);
