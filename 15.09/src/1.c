@@ -3,8 +3,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-bool bracketsChecker(char* string, bool* result)
+bool bracketsChecker(char* string)
 {
+    bool result = true;
     int balance = 0;
     unsigned long len = strlen(string);
 
@@ -14,16 +15,16 @@ bool bracketsChecker(char* string, bool* result)
         } else if (string[i] == ')') {
             balance--;
             if (balance < 0) {
-                *result = false;
+                result = false;
             }
         }
     }
 
     if (balance != 0) {
-        *result = false;
+        result = false;
     }
 
-    return ;
+    return result;
 }
 
 int main(void)
@@ -36,7 +37,7 @@ int main(void)
 
     bool result = true;
 
-    bracketsChecker(input, &result);
+    result = bracketsChecker(input);
     printf("%d\n", result);
 
     free(input);
