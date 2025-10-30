@@ -4,8 +4,9 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-bool substrCount(char* s, char* s1, int lenS, int lenS1, int* counter)
+bool substrCount(char* s, char* s1, int lenS, int lenS1)
 {
+    int counter = 0;
     for (int i = 0; i < lenS; i++) {
         int matchLen = 0;
 
@@ -17,11 +18,11 @@ bool substrCount(char* s, char* s1, int lenS, int lenS1, int* counter)
         }
 
         if (matchLen == lenS1) {
-            (*counter)++;
+            counter++;
         }
     }
 
-    return false;
+    return counter;
 }
 
 int main(void)
@@ -38,7 +39,7 @@ int main(void)
     getchar();
     fgets(s1, lenS1 + 1, stdin);
 
-    substrCount(s, s1, lenS, lenS1, &counter);
+    counter = substrCount(s, s1, lenS, lenS1);
 
     printf("%d\n", counter);
 
