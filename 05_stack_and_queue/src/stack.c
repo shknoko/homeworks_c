@@ -2,15 +2,13 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-typedef struct StackNode
-{
+typedef struct StackNode {
     char data;
     struct StackNode* next;
 } StackNode;
 
-typedef struct Stack 
-{
-    StackNode *head;
+typedef struct Stack {
+    StackNode* head;
 } Stack;
 
 Stack* newStack(void)

@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-int getPriority(char operation) 
+int getPriority(char operation)
 {
     if (operation == '*' || operation == '/') {
         return 2;
@@ -14,7 +14,7 @@ int getPriority(char operation)
     return 0;
 }
 
-int sortStation(char* str, char* res) 
+int sortStation(char* str, char* res)
 {
     unsigned lastUsedResIndex = 0;
     Stack* stack = newStack();
@@ -96,7 +96,8 @@ int sortStation(char* str, char* res)
     return 0;
 }
 
-int main(void) {
+int main(void)
+{
     int n = 0;
     scanf("%d\n", &n);
 

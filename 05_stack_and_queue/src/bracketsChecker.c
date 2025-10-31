@@ -26,7 +26,6 @@ int bracketsChecker(char* str, bool* res)
     return 0;
 }
 
-
 int main(void)
 {
     int n = 0;
