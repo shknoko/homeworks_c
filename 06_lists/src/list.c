@@ -1,4 +1,5 @@
 #include "list.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -127,31 +128,40 @@ bool find(List* list, unsigned index, int* res)
     return true;
 }
 
-bool indexOf(List* list, int data, unsigned* res)
+int indexOf(List* list, int data, unsigned* res)
 {
-    if (list == NULL || list->head == NULL || res == NULL) {
-        return false;
+    if (list == NULL || res == NULL) {
+        return 2;
+    }
+
+    if (list->head == NULL) {
+        *res = 0;
+        return 1;
     }
 
     Node* current = list->head;
 
     unsigned i = 0;
-    while (current != NULL && current->data != data) {
+    while (current != NULL && current->data < data) {
         i++;
         current = current->next;
     }
 
-    if (current == NULL) {
-        return false;
+    *res = i;
+    if (current == NULL || current->data != data) {
+        return 1;
     }
 
-    *res = i;
-    return true;
+    return 0;
 }
 
-bool isEmpty(List* list)
+int isEmpty(List* list)
 {
-    return list == NULL || list->head == NULL;
+    if (list == NULL) {
+        return 2;
+    }
+
+    return list->head == NULL;
 }
 
 bool deleteList(List* list)
@@ -188,5 +198,31 @@ bool len(List* list, unsigned* res)
     }
 
     *res = len;
+    return true;
+}
+
+bool printList(List* list, unsigned startIndex, unsigned endIndex)
+{
+    if (list == NULL || list->head == NULL || startIndex >= endIndex) {
+        return false;
+    }
+
+    Node* current = list->head;
+    for (unsigned i = 0; i < startIndex; i++) {
+        current = current->next;
+        if (current == NULL) {
+            return false;
+        }
+    }
+
+    for (unsigned i = startIndex; i < endIndex; i++) {
+        printf("%d ", current->data);
+        current = current->next;
+        if (current == NULL) {
+            break;
+        }
+    }
+    printf("\n");
+
     return true;
 }
