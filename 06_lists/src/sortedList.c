@@ -10,27 +10,32 @@ int main(void)
     }
 
     while (scanf("%d", &op) == 1) {
-        if (op == 0) {
+        unsigned index = 0;
+        int val = 0;
+
+        switch (op) {
+        case 0:
             deleteList(list);
             return 0;
-        } else if (op == 1) {
-            unsigned index = 0;
-            int val = 0;
+        case 1:
             scanf("%d", &val);
 
             if (indexOf(list, val, &index) != 2) {
                 insert(list, val, index);
             }
-        } else if (op == 2) {
-            int val = 0;
+
+            break;
+        case 2:
             scanf("%d", &val);
 
-            unsigned index = 0;
             if (!indexOf(list, val, &index)) {
                 pop(list, index, &val);
             }
-        } else if (op == 3) {
+
+            break;
+        case 3:
             printList(list, 0, -1);
+            break;
         }
     }
 
