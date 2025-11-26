@@ -1,8 +1,6 @@
 #include "circularList.h"
 #include <stdio.h>
 
-
-
 int main(void)
 {
     int n = 0, m = 0;
@@ -19,7 +17,7 @@ int main(void)
     }
 
     int currentIndex = m - 1;
-    while (listLen > 2) {
+    while (listLen > 1) {
         if (!del(list, currentIndex)) {
             deleteList(list);
             return 1;
