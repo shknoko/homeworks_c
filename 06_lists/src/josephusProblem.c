@@ -1,10 +1,11 @@
 #include "circularList.h"
 #include <stdio.h>
 
-int main(void)
+bool josephus(int n, int m, int* res)
 {
-    int n = 0, m = 0;
-    scanf("%d%d", &n, &m);
+    if (n <= 0 || m <= 0) {
+        return false;
+    }
 
     List* list = newList();
     int listLen = n;
@@ -12,27 +13,41 @@ int main(void)
     for (int i = 1; i <= n; i++) {
         if (!insert(list, i, i - 1)) {
             deleteList(list);
-            return 1;
+            return false;
         }
     }
 
-    int currentIndex = m - 1;
+    int currentIndex = (m - 1) % n;
     while (listLen > 1) {
         if (!del(list, currentIndex)) {
             deleteList(list);
-            return 1;
+            return false;
         }
         listLen--;
         currentIndex = (currentIndex + m - 1) % listLen;
     }
 
-    int res = -1;
-    if (!find(list, 0, &res)) {
+    int last = -1;
+    if (!find(list, 0, &last)) {
         deleteList(list);
+        return false;
+    }
+
+    deleteList(list);
+    *res = last;
+    return true;
+}
+
+int main(void)
+{
+    int n = 0, m = 0;
+    scanf("%d%d", &n, &m);
+
+    int res = -1;
+    if (!josephus(n, m, &res)) {
         return 1;
     }
 
     printf("%d", res);
-    deleteList(list);
     return 0;
 }
