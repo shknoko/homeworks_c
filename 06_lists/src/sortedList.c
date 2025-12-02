@@ -1,5 +1,33 @@
-#include "list.h"
 #include <stdio.h>
+
+#include "list.h"
+
+bool add(List* list, int val)
+{
+    unsigned index = 0;
+    if (indexOf(list, val, &index) != 2) {
+        insert(list, val, index);
+        return true;
+    }
+
+    return false;
+}
+
+bool rm(List* list, int val)
+{
+    unsigned index = -1;
+    int res = indexOf(list, val, &index);
+
+    if (!res) {
+        pop(list, index, &val);
+    } else if (res == 2) {
+        if (index != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 int main(void)
 {
@@ -20,16 +48,18 @@ int main(void)
         case 1:
             scanf("%d", &val);
 
-            if (indexOf(list, val, &index) != 2) {
-                insert(list, val, index);
+            if (!add(list, val)) {
+                deleteList(list);
+                return 1;
             }
 
             break;
         case 2:
             scanf("%d", &val);
 
-            if (!indexOf(list, val, &index)) {
-                pop(list, index, &val);
+            if (!rm(list, val)) {
+                deleteList(list);
+                return 1;
             }
 
             break;
