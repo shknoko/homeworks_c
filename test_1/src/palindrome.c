@@ -1,14 +1,14 @@
-#include <stdio.h>
 #include <stdbool.h>
-#include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-bool palindromeChecker(char *string, int strLen);
-char *removeWhitespaces(char *string, int strLen);
+bool palindromeChecker(char* string, int strLen);
+char* removeWhitespaces(char* string, int strLen);
 
-char *removeWhitespaces(char *string, int strLen)
+char* removeWhitespaces(char* string, int strLen)
 {
-    char *newString = malloc(strLen * sizeof(char));
+    char* newString = malloc(strLen * sizeof(char));
     int p = 0;
     for (int i = 0; i < strLen; i++) {
         if (string[i] != ' ') {
@@ -21,7 +21,7 @@ char *removeWhitespaces(char *string, int strLen)
     return newString;
 }
 
-bool palindromeChecker(char *string, int strLen)
+bool palindromeChecker(char* string, int strLen)
 {
     int fromAnotherBorder = strLen - 1;
     for (int i = 0; i < strLen / 2; i++) {
@@ -33,7 +33,7 @@ bool palindromeChecker(char *string, int strLen)
     return true;
 }
 
-int main(void) 
+int main(void)
 {
     int n = 0;
     scanf("%d\n", &n);
@@ -41,7 +41,7 @@ int main(void)
     char string[n + 1];
     fgets(string, n + 1, stdin);
 
-    char *cleanString = removeWhitespaces(string, strlen(string));
+    char* cleanString = removeWhitespaces(string, strlen(string));
 
     printf("%d\n", palindromeChecker(cleanString, strlen(cleanString)));
 

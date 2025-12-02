@@ -7,7 +7,7 @@ int main(void)
     int counter = 0;
     scanf("%d\n", &n);
 
-    int *array = malloc(n * sizeof(int));
+    int* array = malloc(n * sizeof(int));
     for (int i = 0; i < n; i++) {
         scanf("%d", &array[i]);
     }
