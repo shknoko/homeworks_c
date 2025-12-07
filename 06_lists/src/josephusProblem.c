@@ -48,6 +48,6 @@ int main(void)
         return 1;
     }
 
-    printf("%d", res);
+    printf("%d\n", res);
     return 0;
 }
