@@ -21,9 +21,7 @@ bool rm(List* list, int val)
     if (!res) {
         pop(list, index, &val);
     } else if (res == 2) {
-        if (index != 0) {
-            return false;
-        }
+        return false;
     }
 
     return true;
