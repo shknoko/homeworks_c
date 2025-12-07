@@ -84,6 +84,89 @@ void testAddDuplicate()
     deleteList(list);
 }
 
+void testRmNonExistent()
+{
+    List* list = newList();
+    add(list, 10);
+    add(list, 20);
+    add(list, 30);
+
+    assert(rm(list, 15) == true);
+
+    unsigned length = 0;
+    len(list, &length);
+
+    assert(length == 3);
+
+    deleteList(list);
+}
+
+void testRmHead()
+{
+    List* list = newList();
+    add(list, 10);
+    add(list, 20);
+
+    assert(rm(list, 10) == true);
+
+    int res = -1;
+
+    find(list, 0, &res);
+    assert(res == 20);
+
+    deleteList(list);
+}
+
+void testRmTail()
+{
+    List* list = newList();
+    add(list, 10);
+    add(list, 20);
+
+    assert(rm(list, 20) == true);
+
+    int res = -1;
+
+    find(list, 0, &res);
+    assert(res == 10);
+
+    deleteList(list);
+}
+
+void testAddHead()
+{
+    List* list = newList();
+    add(list, 20);
+    add(list, 10);
+
+    int res = -1;
+
+    find(list, 0, &res);
+    assert(res == 10);
+
+    find(list, 1, &res);
+    assert(res == 20);
+
+    deleteList(list);
+}
+
+void testAddTail()
+{
+    List* list = newList();
+    add(list, 10);
+    add(list, 20);
+
+    int res = -1;
+
+    find(list, 0, &res);
+    assert(res == 10);
+
+    find(list, 1, &res);
+    assert(res == 20);
+
+    deleteList(list);
+}
+
 void runTests()
 {
     testAdd();
@@ -91,4 +174,9 @@ void runTests()
     testAddInEmpty();
     testRmInEmpty();
     testAddDuplicate();
+    testRmNonExistent();
+    testRmHead();
+    testRmTail();
+    testAddHead();
+    testAddTail();
 }
