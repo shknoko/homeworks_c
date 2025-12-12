@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 
 int division(int x, int y);
 
@@ -15,6 +15,7 @@ int division(int x, int y)
             res++;
         }
     }
+
     else if (x >= 0 && y < 0) {
         while (x > y) {
             x += y;
@@ -26,6 +27,7 @@ int division(int x, int y)
             res++;
         }
     }
+
     else if (x < 0 && y > 0) {
         while (x < y) {
             x += y;
@@ -37,6 +39,7 @@ int division(int x, int y)
             res++;
         }
     }
+
     else if (x < 0 && y < 0) {
         while (x <= y) {
             x -= y;

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *gnomeSort(int *array, int arrayLen);
+int* gnomeSort(int* array, int arrayLen);
 
-int *gnomeSort(int *array, int arrayLen) 
+int* gnomeSort(int* array, int arrayLen)
 {
     int j = 2;
     int i = 1;
@@ -27,17 +27,17 @@ int *gnomeSort(int *array, int arrayLen)
     return array;
 }
 
-int main(void) 
+int main(void)
 {
     int n = 0;
     scanf("%d", &n);
 
-    int *array = calloc(n, sizeof(int));
+    int* array = calloc(n, sizeof(int));
     for (int i = 0; i < n; i++) {
         scanf("%d", &array[i]);
     }
 
-    int *sortedArray = gnomeSort(array, n);
+    int* sortedArray = gnomeSort(array, n);
 
     for (int i = 0; i < n; i++) {
         printf("%d\n", sortedArray[i]);
